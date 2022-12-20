@@ -1,0 +1,35 @@
+{
+"headers": {
+    "head_title": "Estudi perceptiu"
+},
+"index": {
+    "title": "Estudi perceptiu",
+    "topic": "Simulació y modelatge de boscos",
+    "btn_start": "Començar!",
+    "instructions": "<p>En aquest estudi se't mostraran parells de vídeos curts (3-4s) d'escenes de boscos en 3D.<br> Per cada parell, hauràs de seleccionar aquella escena que percebis com a més realista.<br>Per a fer-ho, fes click o prem sobre el vídeo que vulguis seleccionar; un marc verd apareixerà al seu voltant.<br>Pots modificar la teva selecció tantes vegades com vulguis, fins que premis el botó \"Següent\" al final de la pàgina.<br>Cal que marquis una de les dues opcions, altrament no podràs avançar cap a la següent pregunta.<br>Tingues en compte que els vídeos poden trigar uns pocs segons a carregar.<br></p> <p>El temps estimat per a completar l'estudi és de 5 a 10 minuts.<br></p> <p>La informació facilitada és totalment anònima i únicament registrem les respostes enviades.<br>En cap cas desem informació relacionada amb el teu dispositiu o la teva connexió.</p> <p>Gràcies per la teva participació!</p>"
+},
+"demographics": {
+    "title": "Estudi perceptiu",
+    "topic": "Simulació y modelatge de boscos",
+    "instructions": "Abans de començar, ens agradaria saber amb quina freqüència camines per entorns naturals i/o jugues a videojocs en 3D que mostrin entorns naturals.<br>Això ens ajudarà a interpretar els resultats de l'estudi.</p>",
+    "q_hike": "Amb quina freqüència surts a la muntanya o visites entorns naturals?",
+    "q_game": "Amb quina freqüència jugues a videojocs 3D que mostrin entorns naturals?",
+    "a_1": "mai o rarament (menys d'un cop a l'any)",
+    "a_2": "ocasionalment (alguna vegada a l'any)",
+    "a_3": "sovint (cada mes)",
+    "a_4": "assíduament (cada setmana o gairebé)",
+    "btn_next": "Següent"
+},
+"paired": {
+    "title": "Realisme d'escenes de bosc",
+    "question": "Quina de les dues escenes perceps com a més realista?",
+    "loading": "Carregant vídeos... si us plau, espera un moment.",
+    "error_no_option": "Si us plau, selecciona una opció",
+    "btn_next": "Següent"
+},
+"results": {
+    "title": "Final de l'estudi",
+    "thanks": "Gràcies pel teu temps!",
+    "answers": "Les teves respostes (pots ignorar-ho)"
+}
+}

@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+
+{% block prefetch %}
+{% if prefetch1 %}<link rel="prefetch" href="{{ videosUrl }}{{ prefetch1 }}.mp4" type="video/mp4" />{% endif %}
+{% if prefetch2 %}<link rel="prefetch" href="{{ videosUrl }}{{ prefetch2 }}.mp4" type="video/mp4" />{% endif %}
+{% endblock %}
+
+{% block css %}
+<style>
+/* HIDE RADIO */
+[type=radio] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* IMAGE STYLES */
+[type=radio] + img {
+  cursor: pointer;
+}
+
+/* CHECKED STYLES */
+[type=radio]:checked + img {
+  outline: 6px solid #08f;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+
+    <h1 class="col-sm-12 bg-primary text-center font-weight-bold" style="margin-bottom: 0">{{ title }} ({{ questionIndex }})</h1>
+    <h3 class="col-sm-12 bg-success text-center">{{ question }}</h3>
+
+    <div class="col-sm-12 text-center">
+        <form method="POST" >
+            <div class="col-sm-12 text-center" id="div_loading">
+                <span style="font-size:larger">{{ loading }}</span>
+            </div>
+            <div class="row" id="div_videos" style="display:none">
+                <div class="col-md-6">
+                    <label>
+                        <input type="radio" name="choice" value="{{ option1 }}" />
+                        <video id="video1" width="100%" style="border: 2px solid #000" autoplay loop muted playsinline>
+                            <source src="{{ videosUrl }}{{ option1 }}.mp4" type="video/mp4" />
+                        </video>
+                    </label>
+                </div>
+                <div class="col-md-6">
+                    <label>
+                        <input type="radio" name="choice" value="{{ option2 }}" />
+                        <video id="video2" width="100%" style="border: 2px solid #000" autoplay loop muted playsinline>
+                            <source src="{{ videosUrl }}{{ option2 }}.mp4" type="video/mp4" />
+                        </video>
+                    </label>
+                </div>
+            </div>
+
+            <div class="col-sm-12">
+                {% if error %}
+                <div style="font-size:larger; color:red; font-weight: bold">{{ error }}</div>
+                {% endif %}
+                <input id="submit" name="submit" type="submit" class="btn btn-primary btn-lg"
+                onclick="return clickForm();" value="{{ btn_next }}" style="font-size:24">
+            </div>
+        </form>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript">
+    function clickForm() {
+        var btn = $("#submit");
+        if (!btn.hasClass('disabled')) {
+            btn.addClass('disabled');
+            return true;
+        }
+        return false;
+    }
+
+    function clearBorders() {
+        document.getElementById("video1").style.border = "2px solid #444";
+        document.getElementById("video2").style.border = "2px solid #444";
+    }
+
+    var loadedVids = 0;
+    var shownVids = false;
+    var videos = document.querySelectorAll('video');
+
+    function startVideos() {
+        videos.forEach(function(v) {
+            v.currentTime = 0;
+            v.play();
+        });
+        $("#div_loading").hide();
+        $("#div_videos").show();
+        shownVids = true;
+    }
+
+    function connectEvents(video) {
+        video.addEventListener('ended', function() {
+            this.currentTime = 0;
+            this.play();
+        }, false);
+        video.addEventListener('click', function() {
+            clearBorders();
+            this.style.border = "8px solid #28a745";
+        });
+        video.addEventListener('loadeddata', function() {
+            video.pause();
+            video.currentTime = 0;
+            loadedVids++;
+            if (loadedVids >= videos.length) {
+                if (shownVids) return;
+                startVideos();
+            }
+        });
+    }
+
+    window.addEventListener('load', function(){
+        clearBorders();
+        videos.forEach(function(v) {
+            connectEvents(v);
+            v.load();
+        });
+    });
+</script>
+{% endblock %}

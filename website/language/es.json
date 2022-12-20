@@ -1,0 +1,35 @@
+{
+"headers": {
+    "head_title": "Estudio perceptual"
+},
+"index": {
+    "title": "Estudio perceptual",
+    "topic": "Simulación y modelado de bosques",
+    "btn_start": "Empezar!",
+    "instructions": "<p>En este estudio se te mostrarán pares de vídeos cortos (3-4s) de escenas de bosque en 3D.<br> Para cada par, deberás seleccionar aquella escena que percibas como más realista.<br> Para hacerlo, haz click o pulsa sobre el vídeo que quieras seleccionar; un marco verde aparecerá a su alrededor.<br>Puedes modificar tu selección tantas veces como quieras, hasta que pulses el botón \"Siguiente\" al final de la página.<br>Debes marcar una de las dos opciones, de lo contrario no podrás avanzar a la siguiente pregunta.<br>Ten en cuenta que los vídeos pueden tardas unos pocos segundos en cargar.<br></p> <p>El tiempo estimado para completar el estudio es de 5 a 10 minutos.<br></p> <p>La información facilitada es totalmente anónima y únicamente registramos las respuestas enviadas.<br>No almacenamos ninguna información relacionada con tu dispositivo o conexión.</p> <p>Gracias por tu participación!</p>"
+},
+"demographics": {
+    "title": "Estudio perceptual",
+    "topic": "Simulación y modelado de bosques",
+    "instructions": "<p>Antes de empezar, nos gustaría saber con qué frecuencia caminas por entornos naturales y/o juegas a videojuegos en 3D que muestren entornos naturales.<br>Esto nos ayudará a interpretar los resultados del estudio.</p>",
+    "q_hike": "¿Con qué frecuencia sales a la montaña o visitas entornos naturales?",
+    "q_game": "¿Con qué frecuencia juegas a videojuegos 3D que muestren entornos naturales?",
+    "a_1": "nunca o raramente (menos de una vez al año)",
+    "a_2": "ocasionalmente (alguna vez al año)",
+    "a_3": "a menudo (cada mes)",
+    "a_4": "asiduamente (cada semana o casi)",
+    "btn_next": "Siguiente"
+},
+"paired": {
+    "title": "Realismo de escenas de bosque",
+    "question": "¿Cuál de las dos escenas percibes como más realista?",
+    "loading": "Cargando vídeos... por favor, espera un momento.",
+    "error_no_option": "Por favor, selecciona una opción",
+    "btn_next": "Siguiente"
+},
+"results": {
+    "title": "Final del estudio",
+    "thanks": "Gracias por tu tiempo!",
+    "answers": "Tus respuestas (puedes ignorar esto)"
+}
+}

@@ -1,0 +1,35 @@
+{
+"headers": {
+    "head_title": "Étude perceptive"
+},
+"index": {
+    "title": "Étude perceptive",
+    "topic": "Simulation et modélisation de scènes forestières",
+    "btn_start": "Commencer!",
+    "instructions": "Dans cette étude, nous vous afficherons des paires de vidéos courtes (3-4s) avec des rendus de scènes de forêt.<br> Pour chaque paire, vous devrez sélectionner la scène que vous percevez comme la plus réaliste.<br> Pour cela, cliquez sur la vidéo que vous souhaitez sélectionner et vous verrez un cadre vert autour d'elle.<br>Vous pouvez modifier votre sélection autant de fois que vous le souhaitez, jusqu'à ce que vous cliquez sur le bouton \"Suivant\" en bas de la page.<br>Vous devez sélectionner l'une des deux options, sinon vous n'avancerez pas à la question suivante.<br>Veuillez noter que le chargement des vidéos peut prendre quelques secondes.<br></p> <p>Le temps estimé pour completer l'étude est de 5 à 10 minutes.<br></p> <p>Les informations que vous envoyez sont totalement anonymes et nous n'enregistrons que vos réponses envoyées.<br> Nous ne collections aucune donnée relative à votre appareil ou à votre connexion.</p> <p>Merci d'avance pour vôtre participation!</p>"
+},
+"demographics": {
+    "title": "Étude perceptive",
+    "topic": "Simulation et modélisation de scnènes forestières",
+    "instructions": "Avant de commencer, nous aimerions savoir à quelle fréquence vous randonnez dans la nature et/ou vous jouez à des jeux vidéo en 3D qui montrent des environnements naturels.<br>Cela nous aidera à interpréter les résultats de l'étude.</p>",
+    "q_hike": "À quelle fréquence vous randonnez ou visitez zones naturelles et forêts?",
+    "q_game": "À quelle fréquence vos jouez à des jeux vidéo 3D qui montrent des environnements naturels?",
+    "a_1": "jamais ou rarement (moins d'une fois par an)",
+    "a_2": "occasionnellement (quelques fois par an)",
+    "a_3": "souvent (tous les mois)",
+    "a_4": "habituellement (toutes les semaines ou presque)",
+    "btn_next": "Suivant"
+},
+"paired": {
+    "title": "Réalisme des scènes forestières",
+    "question": "Laquelle des deux scènes percevez-vous comme la plus réaliste?",
+    "loading": "Téléchargement des vidéos... veuillez patienter.",
+    "error_no_option": "Veuillez sélectionner une option",
+    "btn_next": "Suivant"
+},
+"results": {
+    "title": "Fin de l'étude",
+    "thanks": "Merci pour votre temps!",
+    "answers": "Vos réponses (vous pouvez ignorer ça)"
+}
+}

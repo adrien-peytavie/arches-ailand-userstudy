@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="row">
+    
+    <h1 class="col-sm-12 bg-primary text-center font-weight-bold" style="margin-bottom: 0">{{ title }}</h1>
+    <h3 class="col-sm-12 bg-success text-center">{{ topic }}</h3>
+
+    <div class="col-sm-8 offset-2 text-center" style="font-size:large"> 
+        {{ instructions|safe }}
+    </div>
+
+    <div class="col-sm-12 text-center">
+        <form method="GET" action="/{{ lang }}/start">
+            <input type="hidden" name="group" value="{{group}}" />
+            <input style="font-size:32"  class="btn btn-primary btn-lg" id="submit" name="submit" type="submit" value="{{ btn_start }}">
+        </form>
+    </div>
+
+</div>
+{% endblock %}

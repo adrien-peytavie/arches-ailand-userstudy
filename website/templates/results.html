@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <h1 class="col-sm-12 bg-primary text-center font-weight-bold" style="margin-bottom: 0">{{ title }}</h1>
+    <h3 class="col-sm-12 bg-success text-center">{{ thanks }}</h3>
+    <div class="col-sm-12 text-center">
+        {% if summary|length > 0 %}
+            <h5> {{ answers }} </h5>
+            {% for q in summary %}
+                {{ q.choice1 }} x {{ q.choice2 }} --> {{ q.answer }}<br>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
