@@ -4,13 +4,13 @@
 },
 "index": {
     "title": "Perceptual study",
-    "topic": "Forest simulation and modeling",
+    "topic": "Terrain generation",
     "btn_start": "Start!",
-    "instructions": "<p>In this study you will be shown pairs of short videos (3-4s) of rendered 3D forest scenes.<br> For each pair, you will need to select the scene that you perceive as more realistic.<br> To do so, just click or tap on the video you want to select and you will see a green border around it.<br>You can modify your selection as many times as you want, until you click the \"Next\" button at the bottom of the page.<br>You are required to select one of the two options, otherwise you will not move forward to the next question.<br>Please keep in mind that videos might take up to a few seconds to load.<br></p> <p>Estimated completion time is between 5 and 10 minutes.<br></p> <p>The information you provide is totally anonymous and we only register your submitted answers.<br> We do not collect any data related to your device or connection.</p> <p>Thank you in advance for your participation!</p>"
+    "instructions": "<h3>Instructions</h3><br><p>In this study, you will be shown pairs of short videos (10s) of rendered 3D terrain. <br>For each pair, you will need to select the terrain that you perceive as more realistic. To do so, just click or tap on the video you want to select and you will see a green border around it. You can modify your selection as many times as you want, until you click the \"Next\" button at the bottom of the page. You are required to select one of the two options, otherwise you will not move forward to the next question.<br>Please keep in mind that videos might take up to a few seconds to load.</p> <p>Estimated completion time is between 5 and 10 minutes.</p><p>The information you provide is totally anonymous and we only register your submitted answers. We do not collect any data related to your device or connection.</p> <p>Thank you in advance for your participation!</p>"
 },
 "demographics": {
     "title": "Perceptual study",
-    "topic": "Forest simulation and modeling",
+    "topic": "Terrain generation",
     "instructions": "<p>Before we start, we would like to know how often you hike and/or play video games in 3D that show outdoor environments.<br>This will help us analyse the results of this study.</p>",
     "q_hike": "How often do you hike or visit natural forest areas?",
     "q_game": "How often do you play 3D video games that show outdoor environments?",
@@ -21,8 +21,8 @@
     "btn_next": "Next"
 },
 "paired": {
-    "title": "Realism of forest scenes",
-    "question": "Which of the two scenes do you perceive as more realistic?",
+    "title": "Realism of terrains",
+    "question": "Which terrain looks more realistic (left or right)?",
     "loading": "Loading videos... please wait.",
     "error_no_option": "Please, select an option",
     "btn_next": "Next"
