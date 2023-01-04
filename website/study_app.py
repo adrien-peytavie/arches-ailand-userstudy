@@ -8,15 +8,16 @@ from datetime import datetime
 from flask import Flask, render_template, redirect, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 
-
-app = Flask(__name__, template_folder="templates") 
+app = Flask(__name__, template_folder="templates")
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///userstudy.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'please, tell nobody, ok???234523523'
 db = SQLAlchemy(app)
 
+
 VIDEOS_URL = 'https://perso.liris.cnrs.fr/eric.guerin/US/'
 
-LANG_DIR = 'language'
+LANG_DIR = 'mysite/language'
 DEFAULT_LANGUAGE = 'en'
 TEXTS = {}
 for file in os.listdir(LANG_DIR):
@@ -48,7 +49,7 @@ class PairedChoice(db.Model):
 
 
 
-''' root 
+''' root
     Welcome page
 '''
 @app.route("/")
@@ -75,7 +76,7 @@ def start(lang=DEFAULT_LANGUAGE):
         session.group = ''
     db.session.add(session)
     db.session.commit()
-    return redirect(lang + '/initial?s='+str(session.id))
+    return redirect('/' + lang + '/initial?s='+str(session.id))
 
 
 @app.route("/initial", methods=['GET', 'POST'])
@@ -90,12 +91,12 @@ def initial(lang=DEFAULT_LANGUAGE):
             session = None
     else:
         session = None
-        
+
     if not session:
         return redirect('/' + lang + '/')
-    
+
     if request.form and 'submit' in request.form:
-        try:           
+        try:
             session.hikingFreq = int(request.form['freqHike'])
         except:
             session.hikingFreq = 0
@@ -103,13 +104,13 @@ def initial(lang=DEFAULT_LANGUAGE):
             session.gamingFreq = int(request.form['freqGame'])
         except:
             session.gamingFreq = 0
-            
+
         try:
             db.session.commit()
-            return redirect(lang + '/task1/0?s='+str(session.id))
+            return redirect('/' + lang + '/task1/0?s='+str(session.id))
         except:
             pass
-    
+
     return render_template('demographics.html',
                            **TEXTS[lang]["demographics"], **TEXTS[lang]["headers"])
 
@@ -129,34 +130,34 @@ def results(lang=DEFAULT_LANGUAGE):
             if not session.end:
                 session.end = datetime.utcnow()
                 db.session.commit()
-                
+
             if request.form and 'submit' in request.form:
-                if 'comments' in request.form and request.form['comments'] and len(request.form['comments']) > 0:  
+                if 'comments' in request.form and request.form['comments'] and len(request.form['comments']) > 0:
                     session.comments = request.form['comments']
                     db.session.commit()
-                
+
             data = PairedChoice.query.filter_by(session_id=session_id, task=1).all()
         except Exception as e:
             raise e
             data = []
-            
+
     else:
         #data = PairedChoice.query.filter(task=1).all()
         data = []
     if not monitored:
         data = []
-        
+
     return render_template('results.html', **TEXTS[lang]["results"], **TEXTS[lang]["headers"],
                            summary=data)
 
- 
+
 
 
 ''' Task 1: 2AFC
     Show a pair of images, select the most realistic one
 '''
 
-CHOICES = {
+CHOICES_Old = {
     'VD': ['US0', 'US1', 'US2', 'US3', 'US4', 'US5', 'US6', 'US7', 'US8'],
     'B': ['US9', 'US10', 'US11', 'US12', 'US13', 'US14', 'US15', 'US16', 'US17'],
     'V': ['US18', 'US19', 'US20', 'US21', 'US22', 'US23', 'US24', 'US25', 'US26'],
@@ -164,93 +165,119 @@ CHOICES = {
     'VDE': ['US36', 'US37', 'US38', 'US39', 'US40', 'US41', 'US42', 'US44', 'US45']
 }
 
-def buildTask1Pairs(rndSeed, controlReps=0):
-    
-    rng = random.Random(rndSeed)
-    
-    # shuffle each row (key) independently
-    keys = []
-    vals = []
-    for k,v in CHOICES.items():
-        vv = v.copy()
-        rng.shuffle(vv)
-        vals.append(vv)
-        keys.append(k)
-    numSets = len(keys)
+#CHOICES = {
+#    'Canyon': {
+#		'R' : ['CR0', 'CR1', 'CR2', 'CR3', 'CR4', 'CR5', 'CR6', 'CR7', 'CR8', 'CR9', 'CR10', 'CR11'], # Canyon Real
+#		'G' : ['CG0', 'CG1', 'CG2', 'CG3', 'CG4', 'CG5', 'CG6', 'CG7', 'CG8', 'CG9', 'CG10', 'CG11'], # Canyon Generated
+#		},
+#    'Flat': {
+#		'R' : ['FR0', 'FR1', 'FR2', 'FR3', 'FR4', 'FR5', 'FR6', 'FR7', 'FR8', 'FR9', 'FR10', 'FR11'], # Flat Real
+#		'G' : ['FG0', 'FG1', 'FG2', 'FG3', 'FG4', 'FG5', 'FG6', 'FG7', 'FG8', 'FG9', 'FG10', 'FG11'], # Flat Generated
+#		},
+#    'Hilly': {
+#		'R' : ['HR0', 'HR1', 'HR2', 'HR3', 'HR4', 'HR5', 'HR6', 'HR7', 'HR8', 'HR9', 'HR10', 'HR11'], # Hilly Real
+#		'G' : ['HG0', 'HG1', 'HG2', 'HG3', 'HG4', 'HG5', 'HG6', 'HG7', 'HG8', 'HG9', 'HG10', 'HG11'], # Hilly Generated
+#		},
+#    'Mountaineous': {
+#		'R' : ['MR0', 'MR1', 'MR2', 'MR3', 'MR4', 'MR5', 'MR6', 'MR7', 'MR8', 'MR9', 'MR10', 'MR11'], # Moutain Real
+#		'G' : ['MG0', 'MG1', 'MG2', 'MG3', 'MG4', 'MG5', 'MG6', 'MG7', 'MG8', 'MG9', 'MG10', 'MG11'], # Moutain Generated
+#		},
+#}
 
-    # set combinations
-    pairCombis = []
-    for i in range(numSets):
-        for j in range(i+1, numSets):
-            pairCombis.append((i, j))
-            
-    # build pairs
-    pairs = []
-    emptySet = False
-    available = [len(v) for v in vals]
-    numFullSets = 0
-    while not emptySet:
-        # try to build a full set of combinations
-        tempPairs = []
-        for i,j in pairCombis:
-            p1 = available[i] - 1
-            p2 = available[j] - 1
-            if p1 < 0 or p2 < 0:
-                emptySet = True
-                break
-            available[i] -= 1
-            available[j] -= 1
-            t1 = vals[i][p1] + '_' + keys[i]
-            t2 = vals[j][p2] + '_' + keys[j]
-            tempPairs.append((t1, t2)) 
-            
-        # only append pairs to final list if we got all combinations
-        if not emptySet:
-            numFullSets += 1
-            for p in tempPairs:
-                if rng.random() < 0.5:
-                    pairs.append((p[0], p[1]))
-                else:
-                    pairs.append((p[1], p[0]))
-                
-    rng.shuffle(pairs)
-    
+CHOICES = {
+    'Canyon': {
+		'R' : ['US0_VD', 'US0_VD', 'US0_VD', 'US0_VD', 'US0_VD', 'US0_VD', 'US0_VD', 'US0_VD', 'US0_VD', 'US0_VD', 'US0_VD', 'US0_VD'], # Canyon Real
+		'G' : ['US1_VD', 'US1_VD', 'US1_VD', 'US1_VD', 'US1_VD', 'US1_VD', 'US1_VD', 'US1_VD', 'US1_VD', 'US1_VD', 'US1_VD', 'US1_VD'], # Canyon Generated
+		},
+    'Flat': {
+		'R' : ['US2_VD', 'US2_VD', 'US2_VD', 'US2_VD', 'US2_VD', 'US2_VD', 'US2_VD', 'US2_VD', 'US2_VD', 'US2_VD', 'US2_VD', 'US2_VD'], # Flat Real
+		'G' : ['US3_VD', 'US3_VD', 'US3_VD', 'US3_VD', 'US3_VD', 'US3_VD', 'US3_VD', 'US3_VD', 'US3_VD', 'US3_VD', 'US3_VD', 'US3_VD'], # Flat Generated
+		},
+    'Hilly': {
+		'R' : ['US4_VD', 'US4_VD', 'US4_VD', 'US4_VD', 'US4_VD', 'US4_VD', 'US4_VD', 'US4_VD', 'US4_VD', 'US4_VD', 'US4_VD', 'US4_VD'], # Hilly Real
+		'G' : ['US5_VD', 'US5_VD', 'US5_VD', 'US5_VD', 'US5_VD', 'US5_VD', 'US5_VD', 'US5_VD', 'US5_VD', 'US5_VD', 'US5_VD', 'US5_VD'], # Hilly Generated
+		},
+    'Mountaineous': {
+		'R' : ['US6_VD', 'US6_VD', 'US6_VD', 'US6_VD', 'US6_VD', 'US6_VD', 'US6_VD', 'US6_VD', 'US6_VD', 'US6_VD', 'US6_VD', 'US6_VD'], # Moutain Real
+		'G' : ['US7_VD', 'US7_VD', 'US7_VD', 'US7_VD', 'US7_VD', 'US7_VD', 'US7_VD', 'US7_VD', 'US7_VD', 'US7_VD', 'US7_VD', 'US7_VD'], # Moutain Generated
+		},
+}
+
+def getRandomPair(rng, realTab, generatedTab, number=6):
+	# Init	
+	rrTab = realTab.copy()
+	ggTab = generatedTab.copy()
+	
+	# Shuffle the order inside table
+	rng.shuffle(rrTab)
+	rng.shuffle(ggTab)
+	
+	# Define pairs
+	pairsC = []
+	numPair = min(number, min(len(rrTab), len(ggTab)))
+	for i in range(numPair):
+		# Shuffle the pair
+		pair = [rrTab[i],ggTab[i]]
+		rng.shuffle(pair)
+		
+		pairsC.append((pair[0],pair[1]))
+	
+	return pairsC
+	
+
+def buildTask1Pairs(rndSeed, numberByCat=6, shuffleCategory=False, controlReps=0):
+
+    rng = random.Random(rndSeed)
+	
+    pairsC = []
+    for k,v in CHOICES.items():
+        currentPairs = getRandomPair(rng, v.get("R"), v.get("G"), numberByCat)
+        pairsC.extend(currentPairs)
+	
+    if shuffleCategory :
+        rng.shuffle(pairsC)
+
     if controlReps > 0:
-        nthird = int(len(pairs)/3)
+        nthird = int(len(pairsC)/3)
         repSrc = rng.sample(list(range(nthird)), k=controlReps)
-        repDst = rng.sample(list(range(len(pairs)-nthird, len(pairs))), k=controlReps)
-        
+        repDst = rng.sample(list(range(len(pairsC)-nthird, len(pairsC))), k=controlReps)
+
         for i in range(controlReps):
-            p1,p2 = pairs[repSrc[i]]
-            pairs.insert(repDst[i], (p2,p1))
-            
-    return pairs
+            p1,p2 = pairsC[repSrc[i]]
+            pairsC.insert(repDst[i], (p2,p1))
+
+    return pairsC
 
 
 @app.route("/task1/<int:question_id>", methods=['GET', 'POST'])
 @app.route("/<string:lang>/task1/<int:question_id>", methods=['GET', 'POST'])
 def task1(question_id, lang=DEFAULT_LANGUAGE):
 
+    global pairs # repeated questions just to be sure about participant's answers
+	
     CONTROL_REPS = 2 # repeated questions just to be sure about participant's answers
+    NUMBER_BY_CATEGORY = 6 # repeated questions just to be sure about participant's answers
+    SHUFFLE_CATEGORY = True
 
     session_id = request.args.get('s', '')
-    pairs = buildTask1Pairs(session_id, CONTROL_REPS)
-    
+    pairs = buildTask1Pairs(session_id, NUMBER_BY_CATEGORY, SHUFFLE_CATEGORY, CONTROL_REPS)
+
     # if we finished all the questions, move to the next task (or end page)
     if question_id == len(pairs):
-        return redirect(lang + '/results' + '?s=' + session_id)
-            
+        return redirect('/' + lang + '/results' + '?s=' + session_id)
+
     option1 = pairs[question_id][0]
     option2 = pairs[question_id][1]
     error = ''
-    
+    #error = str(pairs) # Debug pairs
+
     if question_id < len(pairs) - 1:
         prefetch1 = pairs[question_id + 1][0]
         prefetch2 = pairs[question_id + 1][1]
     else:
         prefetch1 = None
         prefetch2 = None
-    
+
     if request.form and 'submit' in request.form:
         if 'choice' in request.form and request.form['choice'] and len(request.form['choice']) > 0:
             try:
@@ -263,23 +290,23 @@ def task1(question_id, lang=DEFAULT_LANGUAGE):
                 userchoice.answer  = request.form['choice']
                 db.session.add(userchoice)
                 db.session.commit()
-                
-                return redirect(lang + '/task1/' + str(question_id+1) + '?s=' + session_id)
+
+                return redirect('/' + lang + '/task1/' + str(question_id+1) + '?s=' + session_id)
             except Exception as e:
                 error = str(e)
         else:
             error = TEXTS[lang]["paired"]["error_no_option"]
-        
+
     return render_template('paired.html', **TEXTS[lang]["paired"], **TEXTS[lang]["headers"],
-                            questionIndex='%d/%d'%(question_id+1, len(pairs)), 
+                            questionIndex='%d/%d'%(question_id+1, len(pairs)),
                             videosUrl = VIDEOS_URL,
-                            option1=option1, option2=option2, 
+                            option1=option1, option2=option2,
                             prefetch1=prefetch1, prefetch2=prefetch2,
                             error=error)
-    
-    
-    
+
+
+
 if __name__ == "__main__":
     db.create_all()  # make our sqlalchemy tables
-    app.run()
-    #app.run(host="0.0.0.0", debug=True)
+    app.run(port=8080)
+    #app.run(host="0.0.0.0", port=8080, debug=True)

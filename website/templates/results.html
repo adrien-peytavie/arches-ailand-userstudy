@@ -1,16 +1,27 @@
 {% extends 'base.html' %}
 
-{% block content %}
-<div class="row">
-    <h1 class="col-sm-12 bg-primary text-center font-weight-bold" style="margin-bottom: 0">{{ title }}</h1>
-    <h3 class="col-sm-12 bg-success text-center">{{ thanks }}</h3>
-    <div class="col-sm-12 text-center">
-        {% if summary|length > 0 %}
-            <h5> {{ answers }} </h5>
-            {% for q in summary %}
-                {{ q.choice1 }} x {{ q.choice2 }} --> {{ q.answer }}<br>
-            {% endfor %}
-        {% endif %}
+{% block header %}
+    <div class="px-3 py-2 bg-dark text-bg-dark">
+      <div class="container">
+          <h1 class="text-center text-white font-weight-bold" style="margin-bottom: 0">{{ title }}</h1>
+      </div>
     </div>
-</div>
+{% endblock %}
+
+{% block content %}
+
+    <div class="container py-3">
+        <div class="p-5 mb-3 bg-light border rounded-3">
+            <h3 class="col-sm-12 text-center">{{ thanks }}</h3>
+            <div class="col-sm-12 text-center">
+                {% if summary|length > 0 %}
+                    <h5> {{ answers }} </h5>
+                    {% for q in summary %}
+                        {{ q.choice1 }} x {{ q.choice2 }} --> {{ q.answer }}<br>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

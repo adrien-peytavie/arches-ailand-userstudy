@@ -1,67 +1,76 @@
 {% extends 'base.html' %}
 
+{% block header %}
+    <div class="px-3 py-2 bg-dark text-bg-dark">
+      <div class="container">
+          <h1 class="text-center text-white font-weight-bold" style="margin-bottom: 0">{{ title }}</h1>
+      </div>
+    </div>
+    <div class="px-3 py-2 border-bottom">
+        <div class="container d-flex flex-wrap justify-content-center">
+            <h2 class="text-center">{{ topic }}</h2>
+        </div>
+    </div>
+{% endblock %}
 
 {% block content %}
-<div class="row">
-    
-    <h1 class="col-sm-12 bg-primary text-center font-weight-bold" style="margin-bottom: 0">{{ title }}</h1>
-    <h3 class="col-sm-12 bg-success text-center">{{ topic }}</h3>
 
-    <div class="col-sm-8 offset-2 text-center" style="font-size:large"> 
-        {{ instructions|safe }}
+    <div class="container py-3">
+        <div class="p-5 mb-3 bg-light border rounded-3">
+            {{ instructions|safe }}
+
+            <div class="col-sm-8 offset-2 text-center">
+                <form method="POST">
+                    <div class="form-group">
+                        <span class="font-weight-bold">{{ q_hike }}</span>
+                        <br>
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="radio" name="freqHike" id="freqHike1" value="1">
+                            <label class="form-check-label" for="freqHike1">{{ a_1 }}</label>
+                        </div>
+                        <br>
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="radio" name="freqHike" id="freqHike2" value="2">
+                            <label class="form-check-label" for="freqHike2">{{ a_2 }}</label>
+                        </div>
+                        <br>
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="radio" name="freqHike" id="freqHike3" value="3">
+                            <label class="form-check-label" for="freqHike3">{{ a_3 }}</label>
+                        </div>
+                        <br>
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="radio" name="freqHike" id="freqHike4" value="4">
+                            <label class="form-check-label" for="freqHike4">{{ a_4 }}</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <span class="font-weight-bold">{{ q_game }}</span>
+                        <br>
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="radio" name="freqGame" id="freqGame1" value="1">
+                            <label class="form-check-label" for="freqGame1">{{ a_1 }}</label>
+                        </div>
+                        <br>
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="radio" name="freqGame" id="freqGame2" value="2">
+                            <label class="form-check-label" for="freqGame2">{{ a_2 }}</label>
+                        </div>
+                        <br>
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="radio" name="freqGame" id="freqGame3" value="3">
+                            <label class="form-check-label" for="freqGame3">{{ a_3 }}</label>
+                        </div>
+                        <br>
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="radio" name="freqGame" id="freqGame4" value="4">
+                            <label class="form-check-label" for="freqGame4">{{ a_4 }}</label>
+                        </div>
+                    </div>
+                    <input style="font-size:32"  class="btn btn-primary btn-lg" id="submit" name="submit" type="submit" value="{{ btn_next }}">
+                </form>
+            </div>
+        </div>
     </div>
 
-    <div class="col-sm-8 offset-2 text-center">
-        <form method="POST">
-            <div class="form-group">
-                <span class="font-weight-bold">{{ q_hike }}</span>
-                <br>
-                <div class="form-check-inline">
-                    <input class="form-check-input" type="radio" name="freqHike" id="freqHike1" value="1"> 
-                    <label class="form-check-label" for="freqHike1">{{ a_1 }}</label>
-                </div>
-                <br>
-                <div class="form-check-inline">
-                    <input class="form-check-input" type="radio" name="freqHike" id="freqHike2" value="2"> 
-                    <label class="form-check-label" for="freqHike2">{{ a_2 }}</label>
-                </div>
-                <br>
-                <div class="form-check-inline">
-                    <input class="form-check-input" type="radio" name="freqHike" id="freqHike3" value="3"> 
-                    <label class="form-check-label" for="freqHike3">{{ a_3 }}</label>
-                </div>
-                <br>
-                <div class="form-check-inline">
-                    <input class="form-check-input" type="radio" name="freqHike" id="freqHike4" value="4"> 
-                    <label class="form-check-label" for="freqHike4">{{ a_4 }}</label>
-                </div>
-            </div>
-            <div class="form-group">
-                <span class="font-weight-bold">{{ q_game }}</span>
-                <br>
-                <div class="form-check-inline">
-                    <input class="form-check-input" type="radio" name="freqGame" id="freqGame1" value="1"> 
-                    <label class="form-check-label" for="freqGame1">{{ a_1 }}</label>
-                </div>
-                <br>
-                <div class="form-check-inline">
-                    <input class="form-check-input" type="radio" name="freqGame" id="freqGame2" value="2"> 
-                    <label class="form-check-label" for="freqGame2">{{ a_2 }}</label>
-                </div>
-                <br>
-                <div class="form-check-inline">
-                    <input class="form-check-input" type="radio" name="freqGame" id="freqGame3" value="3"> 
-                    <label class="form-check-label" for="freqGame3">{{ a_3 }}</label>
-                </div>
-                <br>
-                <div class="form-check-inline">
-                    <input class="form-check-input" type="radio" name="freqGame" id="freqGame4" value="4"> 
-                    <label class="form-check-label" for="freqGame4">{{ a_4 }}</label>
-                </div>
-            </div>
-            <input style="font-size:32"  class="btn btn-primary btn-lg" id="submit" name="submit" type="submit" value="{{ btn_next }}">
-        </form>
-    </div>
-
-</div>
 {% endblock %}
