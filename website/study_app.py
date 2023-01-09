@@ -15,7 +15,7 @@ app.config['SECRET_KEY'] = 'please, tell nobody, ok???234523523'
 db = SQLAlchemy(app)
 
 
-VIDEOS_URL = 'https://perso.liris.cnrs.fr/eric.guerin/US/'
+VIDEOS_URL = 'https://perso.liris.cnrs.fr/eric.guerin/USDiffusion/'
 
 LANG_DIR = 'mysite/language'
 DEFAULT_LANGUAGE = 'en'
@@ -165,43 +165,43 @@ CHOICES_Old = {
     'VDE': ['US36', 'US37', 'US38', 'US39', 'US40', 'US41', 'US42', 'US44', 'US45']
 }
 
-#CHOICES = {
-#    'Canyon': {
-#		'R' : ['CR0', 'CR1', 'CR2', 'CR3', 'CR4', 'CR5', 'CR6', 'CR7', 'CR8', 'CR9', 'CR10', 'CR11'], # Canyon Real
-#		'G' : ['CG0', 'CG1', 'CG2', 'CG3', 'CG4', 'CG5', 'CG6', 'CG7', 'CG8', 'CG9', 'CG10', 'CG11'], # Canyon Generated
-#		},
-#    'Flat': {
-#		'R' : ['FR0', 'FR1', 'FR2', 'FR3', 'FR4', 'FR5', 'FR6', 'FR7', 'FR8', 'FR9', 'FR10', 'FR11'], # Flat Real
-#		'G' : ['FG0', 'FG1', 'FG2', 'FG3', 'FG4', 'FG5', 'FG6', 'FG7', 'FG8', 'FG9', 'FG10', 'FG11'], # Flat Generated
-#		},
-#    'Hilly': {
-#		'R' : ['HR0', 'HR1', 'HR2', 'HR3', 'HR4', 'HR5', 'HR6', 'HR7', 'HR8', 'HR9', 'HR10', 'HR11'], # Hilly Real
-#		'G' : ['HG0', 'HG1', 'HG2', 'HG3', 'HG4', 'HG5', 'HG6', 'HG7', 'HG8', 'HG9', 'HG10', 'HG11'], # Hilly Generated
-#		},
-#    'Mountaineous': {
-#		'R' : ['MR0', 'MR1', 'MR2', 'MR3', 'MR4', 'MR5', 'MR6', 'MR7', 'MR8', 'MR9', 'MR10', 'MR11'], # Moutain Real
-#		'G' : ['MG0', 'MG1', 'MG2', 'MG3', 'MG4', 'MG5', 'MG6', 'MG7', 'MG8', 'MG9', 'MG10', 'MG11'], # Moutain Generated
-#		},
-#}
-
 CHOICES = {
     'Canyon': {
-		'R' : ['US0_VD', 'US0_VD', 'US0_VD', 'US0_VD', 'US0_VD', 'US0_VD', 'US0_VD', 'US0_VD', 'US0_VD', 'US0_VD', 'US0_VD', 'US0_VD'], # Canyon Real
-		'G' : ['US1_VD', 'US1_VD', 'US1_VD', 'US1_VD', 'US1_VD', 'US1_VD', 'US1_VD', 'US1_VD', 'US1_VD', 'US1_VD', 'US1_VD', 'US1_VD'], # Canyon Generated
+		'R' : ['CR0', 'CR1', 'CR2', 'CR3', 'CR4', 'CR5', 'CR6', 'CR7', 'CR8', 'CR9', 'CR10', 'CR11'], # Canyon Real
+		'G' : ['CG0', 'CG1', 'CG2', 'CG3', 'CG4', 'CG5', 'CG6', 'CG7', 'CG8', 'CG9', 'CG10', 'CG11'], # Canyon Generated
 		},
     'Flat': {
-		'R' : ['US2_VD', 'US2_VD', 'US2_VD', 'US2_VD', 'US2_VD', 'US2_VD', 'US2_VD', 'US2_VD', 'US2_VD', 'US2_VD', 'US2_VD', 'US2_VD'], # Flat Real
-		'G' : ['US3_VD', 'US3_VD', 'US3_VD', 'US3_VD', 'US3_VD', 'US3_VD', 'US3_VD', 'US3_VD', 'US3_VD', 'US3_VD', 'US3_VD', 'US3_VD'], # Flat Generated
+		'R' : ['FR0', 'FR1', 'FR2', 'FR3', 'FR4', 'FR5', 'FR6', 'FR7', 'FR8', 'FR9', 'FR10', 'FR11'], # Flat Real
+		'G' : ['FG0', 'FG1', 'FG2', 'FG3', 'FG4', 'FG5', 'FG6', 'FG7', 'FG8', 'FG9', 'FG10', 'FG11'], # Flat Generated
 		},
     'Hilly': {
-		'R' : ['US4_VD', 'US4_VD', 'US4_VD', 'US4_VD', 'US4_VD', 'US4_VD', 'US4_VD', 'US4_VD', 'US4_VD', 'US4_VD', 'US4_VD', 'US4_VD'], # Hilly Real
-		'G' : ['US5_VD', 'US5_VD', 'US5_VD', 'US5_VD', 'US5_VD', 'US5_VD', 'US5_VD', 'US5_VD', 'US5_VD', 'US5_VD', 'US5_VD', 'US5_VD'], # Hilly Generated
+		'R' : ['HR0', 'HR1', 'HR2', 'HR3', 'HR4', 'HR5', 'HR6', 'HR7', 'HR8', 'HR9', 'HR10', 'HR11'], # Hilly Real
+		'G' : ['HG0', 'HG1', 'HG2', 'HG3', 'HG4', 'HG5', 'HG6', 'HG7', 'HG8', 'HG9', 'HG10', 'HG11'], # Hilly Generated
 		},
     'Mountaineous': {
-		'R' : ['US6_VD', 'US6_VD', 'US6_VD', 'US6_VD', 'US6_VD', 'US6_VD', 'US6_VD', 'US6_VD', 'US6_VD', 'US6_VD', 'US6_VD', 'US6_VD'], # Moutain Real
-		'G' : ['US7_VD', 'US7_VD', 'US7_VD', 'US7_VD', 'US7_VD', 'US7_VD', 'US7_VD', 'US7_VD', 'US7_VD', 'US7_VD', 'US7_VD', 'US7_VD'], # Moutain Generated
+		'R' : ['MR0', 'MR1', 'MR2', 'MR3', 'MR4', 'MR5', 'MR6', 'MR7', 'MR8', 'MR9', 'MR10', 'MR11'], # Moutain Real
+		'G' : ['MG0', 'MG1', 'MG2', 'MG3', 'MG4', 'MG5', 'MG6', 'MG7', 'MG8', 'MG9', 'MG10', 'MG11'], # Moutain Generated
 		},
 }
+
+#CHOICES = {
+#    'Canyon': {
+#		'R' : ['US0_VD', 'US0_VD', 'US0_VD', 'US0_VD', 'US0_VD', 'US0_VD', 'US0_VD', 'US0_VD', 'US0_VD', 'US0_VD', 'US0_VD', 'US0_VD'], # Canyon Real
+#		'G' : ['US1_VD', 'US1_VD', 'US1_VD', 'US1_VD', 'US1_VD', 'US1_VD', 'US1_VD', 'US1_VD', 'US1_VD', 'US1_VD', 'US1_VD', 'US1_VD'], # Canyon Generated
+#		},
+#    'Flat': {
+#		'R' : ['US2_VD', 'US2_VD', 'US2_VD', 'US2_VD', 'US2_VD', 'US2_VD', 'US2_VD', 'US2_VD', 'US2_VD', 'US2_VD', 'US2_VD', 'US2_VD'], # Flat Real
+#		'G' : ['US3_VD', 'US3_VD', 'US3_VD', 'US3_VD', 'US3_VD', 'US3_VD', 'US3_VD', 'US3_VD', 'US3_VD', 'US3_VD', 'US3_VD', 'US3_VD'], # Flat Generated
+#		},
+#    'Hilly': {
+#		'R' : ['US4_VD', 'US4_VD', 'US4_VD', 'US4_VD', 'US4_VD', 'US4_VD', 'US4_VD', 'US4_VD', 'US4_VD', 'US4_VD', 'US4_VD', 'US4_VD'], # Hilly Real
+#		'G' : ['US5_VD', 'US5_VD', 'US5_VD', 'US5_VD', 'US5_VD', 'US5_VD', 'US5_VD', 'US5_VD', 'US5_VD', 'US5_VD', 'US5_VD', 'US5_VD'], # Hilly Generated
+#		},
+#    'Mountaineous': {
+#		'R' : ['US6_VD', 'US6_VD', 'US6_VD', 'US6_VD', 'US6_VD', 'US6_VD', 'US6_VD', 'US6_VD', 'US6_VD', 'US6_VD', 'US6_VD', 'US6_VD'], # Moutain Real
+#		'G' : ['US7_VD', 'US7_VD', 'US7_VD', 'US7_VD', 'US7_VD', 'US7_VD', 'US7_VD', 'US7_VD', 'US7_VD', 'US7_VD', 'US7_VD', 'US7_VD'], # Moutain Generated
+#		},
+#}
 
 def getRandomPair(rng, realTab, generatedTab, number=6):
 	# Init	

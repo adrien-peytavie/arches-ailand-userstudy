@@ -6,7 +6,7 @@
     "title": "Perceptual study",
     "topic": "Terrain generation",
     "btn_start": "Start!",
-    "instructions": "<h3>Instructions</h3><br><p>In this study, you will be shown pairs of short videos (10s) of rendered 3D terrain. <br>For each pair, you will need to select the terrain that you perceive as more realistic. To do so, just click or tap on the video you want to select and you will see a green border around it. You can modify your selection as many times as you want, until you click the \"Next\" button at the bottom of the page. You are required to select one of the two options, otherwise you will not move forward to the next question.<br>Please keep in mind that videos might take up to a few seconds to load.</p> <p>Estimated completion time is between 5 and 10 minutes.</p><p>The information you provide is totally anonymous and we only register your submitted answers. We do not collect any data related to your device or connection.</p> <p>Thank you in advance for your participation!</p>"
+    "instructions": "<h3>Instructions</h3><br><p>In this study, you will be shown pairs of short videos (10s) of rendered 3D terrain. <br>For each pair, you will need to select the terrain that you perceive as more realistic. To do so, just click or tap on the video you want to select and you will see a green border around it. You can modify your selection as many times as you want, until you click the \"Next\" button at the bottom of the page. You are required to select one of the two options, otherwise you will not be able to move forward to the next question.<br>Please keep in mind that videos might take up to a few seconds to load.</p> <p>Estimated completion time is between 5 and 10 minutes.</p><p>The information you provide is totally anonymous and we only register your submitted answers. We do not collect any data related to your device or connection.</p> <p>Thank you in advance for your participation!</p>"
 },
 "demographics": {
     "title": "Perceptual study",
@@ -17,7 +17,7 @@
     "a_1": "never or rarely (less than once a year)",
     "a_2": "occasionally (a few times a year)",
     "a_3": "often (every month)",
-    "a_4": "usually (every week or almost)",
+    "a_4": "usually (every week or almost every week)",
     "btn_next": "Next"
 },
 "paired": {
