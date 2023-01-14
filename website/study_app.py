@@ -46,6 +46,7 @@ class PairedChoice(db.Model):
     choice2    = db.Column(db.String(255)) # second option
     answer     = db.Column(db.String(255)) # chosen option
     datetime   = db.Column(db.DateTime, default=datetime.utcnow)
+    timing     = db.Column(db.Integer)     # time to answer the question after the loading of the video
 
 
 
@@ -204,14 +205,14 @@ CHOICES = {
 #}
 
 def getRandomPair(rng, realTab, generatedTab, number=6):
-	# Init	
+	# Init
 	rrTab = realTab.copy()
 	ggTab = generatedTab.copy()
-	
+
 	# Shuffle the order inside table
 	rng.shuffle(rrTab)
 	rng.shuffle(ggTab)
-	
+
 	# Define pairs
 	pairsC = []
 	numPair = min(number, min(len(rrTab), len(ggTab)))
@@ -219,21 +220,21 @@ def getRandomPair(rng, realTab, generatedTab, number=6):
 		# Shuffle the pair
 		pair = [rrTab[i],ggTab[i]]
 		rng.shuffle(pair)
-		
+
 		pairsC.append((pair[0],pair[1]))
-	
+
 	return pairsC
-	
+
 
 def buildTask1Pairs(rndSeed, numberByCat=6, shuffleCategory=False, controlReps=0):
 
     rng = random.Random(rndSeed)
-	
+
     pairsC = []
     for k,v in CHOICES.items():
         currentPairs = getRandomPair(rng, v.get("R"), v.get("G"), numberByCat)
         pairsC.extend(currentPairs)
-	
+
     if shuffleCategory :
         rng.shuffle(pairsC)
 
@@ -254,7 +255,7 @@ def buildTask1Pairs(rndSeed, numberByCat=6, shuffleCategory=False, controlReps=0
 def task1(question_id, lang=DEFAULT_LANGUAGE):
 
     global pairs # repeated questions just to be sure about participant's answers
-	
+
     CONTROL_REPS = 2 # repeated questions just to be sure about participant's answers
     NUMBER_BY_CATEGORY = 6 # repeated questions just to be sure about participant's answers
     SHUFFLE_CATEGORY = True
@@ -288,6 +289,7 @@ def task1(question_id, lang=DEFAULT_LANGUAGE):
                 userchoice.choice1 = option1
                 userchoice.choice2 = option2
                 userchoice.answer  = request.form['choice']
+                userchoice.timing  = request.form['timing']
                 db.session.add(userchoice)
                 db.session.commit()
 

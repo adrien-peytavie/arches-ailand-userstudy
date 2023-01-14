@@ -71,11 +71,14 @@
                     </div>
                 </div>
 
+				<input id="timing" type="hidden" name="timing" value="" />
+
                 <div class="col-sm-12 text-center ">
                     {% if error %}
                         <div class="p-3 my-4 rounded-2 font-weight-bold text-white bg-danger">{{ error }}</div>
                     {% endif %}
-                    <input id="submit" name="submit" type="submit" class="btn btn-primary btn-lg" onclick="return clickForm();" value="{{ btn_next }}" style="font-size:24">
+                    <div id="selectvideo" class="p-3 my-4 rounded-2 font-weight-bold text-white bg-danger" style="display:none;">Select a video</div>
+                    <input id="submit" name="submit" type="submit" disabled="True" class="btn btn-primary btn-lg" onclick="return clickForm();" value="{{ btn_next }}" style="font-size:24">
                 </div>
             </form>
         </div>
@@ -85,8 +88,15 @@
 
 {% block javascript %}
 <script type="text/javascript">
+
+    var loadedVids = 0;
+    var shownVids = false;
+    var videos = document.querySelectorAll('video');
+	var startTimer = -1;
+
     function clickForm() {
         var btn = $("#submit");
+		document.getElementById("timing").value = Date.now() - startTimer;
         if (!btn.hasClass('disabled')) {
             btn.addClass('disabled');
             return true;
@@ -99,10 +109,6 @@
         document.getElementById("video2").style.border = "2px solid #444";
     }
 
-    var loadedVids = 0;
-    var shownVids = false;
-    var videos = document.querySelectorAll('video');
-
     function startVideos() {
         videos.forEach(function(v) {
             v.currentTime = 0;
@@ -111,6 +117,12 @@
         $("#div_loading").hide();
         $("#div_videos").show();
         shownVids = true;
+		startTimer = Date.now();
+	    document.getElementById("timing").value = (startTimer).toString();
+	    var x = document.getElementById("selectvideo");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        }
     }
 
     function connectEvents(video) {
@@ -121,6 +133,12 @@
         video.addEventListener('click', function() {
             clearBorders();
             this.style.border = "8px solid #28a745";
+            document.getElementById("submit").disabled = false;
+            var x = document.getElementById("selectvideo");
+            if (x.style.display === "none") {
+            } else {
+                x.style.display = "none";
+            }
         });
         video.addEventListener('loadeddata', function() {
             video.pause();
