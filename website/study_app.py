@@ -15,7 +15,7 @@ app.config['SECRET_KEY'] = 'please, tell nobody, ok???234523523'
 db = SQLAlchemy(app)
 
 
-VIDEOS_URL = 'https://perso.liris.cnrs.fr/eric.guerin/USDiffusion/'
+VIDEOS_URL = 'https://perso.liris.cnrs.fr/eric.guerin/VideosUS/'
 
 LANG_DIR = 'mysite/language'
 DEFAULT_LANGUAGE = 'en'
@@ -166,22 +166,28 @@ CHOICES_Old = {
     'VDE': ['US36', 'US37', 'US38', 'US39', 'US40', 'US41', 'US42', 'US44', 'US45']
 }
 
+
+# R : real, G : Generated, C : CGAN2017
 CHOICES = {
     'Canyon': {
-		'R' : ['CR0', 'CR1', 'CR2', 'CR3', 'CR4', 'CR5', 'CR6', 'CR7', 'CR8', 'CR9', 'CR10', 'CR11'], # Canyon Real
-		'G' : ['CG0', 'CG1', 'CG2', 'CG3', 'CG4', 'CG5', 'CG6', 'CG7', 'CG8', 'CG9', 'CG10', 'CG11'], # Canyon Generated
+		'R' : ['CR0', 'CR1', 'CR2', 'CR3', 'CR4', 'CR5', 'CR6', 'CR7', 'CR8', 'CR9'], # Canyon Real
+		'G' : ['CG0', 'CG1', 'CG2', 'CG3', 'CG4', 'CG5', 'CG6', 'CG7', 'CG8', 'CG9'], # Canyon Generated
+		'C' : ['CC0', 'CC1', 'CC2', 'CC3', 'CC4', 'CC5', 'CC6', 'CC7', 'CC8', 'CC9'], # Canyon CGAN
 		},
     'Flat': {
-		'R' : ['FR0', 'FR1', 'FR2', 'FR3', 'FR4', 'FR5', 'FR6', 'FR7', 'FR8', 'FR9', 'FR10', 'FR11'], # Flat Real
-		'G' : ['FG0', 'FG1', 'FG2', 'FG3', 'FG4', 'FG5', 'FG6', 'FG7', 'FG8', 'FG9', 'FG10', 'FG11'], # Flat Generated
+		'R' : ['FR0', 'FR1', 'FR2', 'FR3', 'FR4', 'FR5', 'FR6', 'FR7', 'FR8', 'FR9'], # Flat Real
+		'G' : ['FG0', 'FG1', 'FG2', 'FG3', 'FG4', 'FG5', 'FG6', 'FG7', 'FG8', 'FG9'], # Flat Generated
+		'C' : ['FC0', 'FC1', 'FC2', 'FC3', 'FC4', 'FC5', 'FC6', 'FC7', 'FC8', 'FC9'], # Flat CGAN
 		},
     'Hilly': {
-		'R' : ['HR0', 'HR1', 'HR2', 'HR3', 'HR4', 'HR5', 'HR6', 'HR7', 'HR8', 'HR9', 'HR10', 'HR11'], # Hilly Real
-		'G' : ['HG0', 'HG1', 'HG2', 'HG3', 'HG4', 'HG5', 'HG6', 'HG7', 'HG8', 'HG9', 'HG10', 'HG11'], # Hilly Generated
+		'R' : ['HR0', 'HR1', 'HR2', 'HR3', 'HR4', 'HR5', 'HR6', 'HR7', 'HR8', 'HR9'], # Hilly Real
+		'G' : ['HG0', 'HG1', 'HG2', 'HG3', 'HG4', 'HG5', 'HG6', 'HG7', 'HG8', 'HG9'], # Hilly Generated
+		'C' : ['HC0', 'HC1', 'HC2', 'HC3', 'HC4', 'HC5', 'HC6', 'HC7', 'HC8', 'HC9'], # Hilly CGAN
 		},
     'Mountaineous': {
-		'R' : ['MR0', 'MR1', 'MR2', 'MR3', 'MR4', 'MR5', 'MR6', 'MR7', 'MR8', 'MR9', 'MR10', 'MR11'], # Moutain Real
-		'G' : ['MG0', 'MG1', 'MG2', 'MG3', 'MG4', 'MG5', 'MG6', 'MG7', 'MG8', 'MG9', 'MG10', 'MG11'], # Moutain Generated
+		'R' : ['MR0', 'MR1', 'MR2', 'MR3', 'MR4', 'MR5', 'MR6', 'MR7', 'MR8', 'MR9'], # Moutain Real
+		'G' : ['MG0', 'MG1', 'MG2', 'MG3', 'MG4', 'MG5', 'MG6', 'MG7', 'MG8', 'MG9'], # Moutain Generated
+		'C' : ['MC0', 'MC1', 'MC2', 'MC3', 'MC4', 'MC5', 'MC6', 'MC7', 'MC8', 'MC9'], # Moutain CGAN
 		},
 }
 
@@ -226,13 +232,43 @@ def getRandomPair(rng, realTab, generatedTab, number=6):
 	return pairsC
 
 
+def getRandomPair2(rng, TabReal, TabGenerated, TabCGan, number=6):
+	# Init
+	rrTab = TabReal.copy()
+	ggTab = TabGenerated.copy()
+	ccTab = TabCGan.copy()
+
+	# Shuffle the order inside table
+	rng.shuffle(rrTab)
+	rng.shuffle(ggTab)
+	rng.shuffle(ccTab)
+
+	# Define pairs
+	pairsC = []
+	numPair = min(int(number/3), min(len(rrTab), len(ggTab)))
+	for i in range(numPair):
+		# Shuffle the pair
+		pairA = [rrTab[3*i+0],ggTab[3*i+0]]
+		pairB = [ggTab[3*i+1],ccTab[3*i+1]]
+		pairC = [rrTab[3*i+2],ccTab[3*i+2]]
+
+		rng.shuffle(pairA)
+		rng.shuffle(pairB)
+		rng.shuffle(pairC)
+
+		pairsC.append((pairA[0],pairA[1]))
+		pairsC.append((pairB[0],pairB[1]))
+		pairsC.append((pairC[0],pairC[1]))
+
+	return pairsC
+
 def buildTask1Pairs(rndSeed, numberByCat=6, shuffleCategory=False, controlReps=0):
 
     rng = random.Random(rndSeed)
 
     pairsC = []
     for k,v in CHOICES.items():
-        currentPairs = getRandomPair(rng, v.get("R"), v.get("G"), numberByCat)
+        currentPairs = getRandomPair2(rng, v.get("R"), v.get("G"), v.get("C"), numberByCat)
         pairsC.extend(currentPairs)
 
     if shuffleCategory :
@@ -254,10 +290,10 @@ def buildTask1Pairs(rndSeed, numberByCat=6, shuffleCategory=False, controlReps=0
 @app.route("/<string:lang>/task1/<int:question_id>", methods=['GET', 'POST'])
 def task1(question_id, lang=DEFAULT_LANGUAGE):
 
-    global pairs # repeated questions just to be sure about participant's answers
+    global pairs
 
     CONTROL_REPS = 2 # repeated questions just to be sure about participant's answers
-    NUMBER_BY_CATEGORY = 6 # repeated questions just to be sure about participant's answers
+    NUMBER_BY_CATEGORY = 6
     SHUFFLE_CATEGORY = True
 
     session_id = request.args.get('s', '')
